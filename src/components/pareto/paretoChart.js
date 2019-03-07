@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Grid from '../layout/grid'
-import { Bar } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2'
 import './paretoChart.css'
 
 const INITIAL_STATE = { data: undefined }
@@ -28,7 +28,7 @@ export default class ParetoChart extends Component {
 
         let before = 0
         const lineData = barDataset.data.map(d => {
-            const sum = d/total + before
+            const sum = (100*d/total) + before
             before = sum
             return parseFloat(sum).toFixed(3)
         })
@@ -100,7 +100,11 @@ export default class ParetoChart extends Component {
                                         display: false
                                     },
                                     ticks: {
-                                        min: 0
+                                        min: 0,
+                                        max: 100,
+                                        callback: function(value, index, values) {
+                                            return value+'%'
+                                        }
                                     }
                                 }]
                             }
