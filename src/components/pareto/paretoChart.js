@@ -19,6 +19,7 @@ export default class ParetoChart extends Component {
     }
 
     getChartData(data) {
+        const total = this.getMaxYAxisValue(data)
         const labels = Object.keys(data)
         const barDataset = Object.values(data).reduce((set, e) => {
             set.data.push(e)
@@ -27,13 +28,19 @@ export default class ParetoChart extends Component {
 
         let before = 0
         const lineData = barDataset.data.map(d => {
-            const sum = d + before
+            const sum = d/total + before
             before = sum
-            return sum
+            return parseFloat(sum).toFixed(3)
         })
 
         const lineDataset = {
-            label: 'Line', data: lineData, type: 'line', borderWidth: 2, backgroundColor: 'transparent', borderColor: 'rgb(51, 51, 51, 0.5)'
+            yAxisID: 'B',
+            label: 'Line', 
+            data: lineData, 
+            type: 'line', 
+            borderWidth: 2, 
+            backgroundColor: 'transparent', 
+            borderColor: 'rgb(51, 51, 51, 0.5)'
         }
 
 
