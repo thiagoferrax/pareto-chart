@@ -12,7 +12,13 @@ export default class ParetoChart extends Component {
     }
 
     componentWillMount() {
-        this.setState({ data: this.props.data })
+
+        const data = Object.entries(this.props.data).sort((a, b) => b[1] - a[1]).reduce((ordered, entry) =>    {
+            ordered[entry[0]] = entry[1]
+            return ordered
+        }, {})
+
+        this.setState({ data })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -61,9 +67,9 @@ export default class ParetoChart extends Component {
             return <React.Fragment></React.Fragment>
         }
 
-        const chartData = this.getChartData(this.props.data)
+        const chartData = this.getChartData(this.state.data)
 
-        const maxYAxisValue = this.getMaxYAxisValue(this.props.data)
+        const maxYAxisValue = this.getMaxYAxisValue(this.state.data)
 
         return (
             <Grid cols={this.props.cols}>

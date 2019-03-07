@@ -12,8 +12,8 @@ export default class App extends Component {
         <ParetoChart
           data={
             {
-              Codification: 40,
               Tests: 20,
+              Codification: 40,
               Release: 10,
               Analysis: 5,
               Planning: 3
