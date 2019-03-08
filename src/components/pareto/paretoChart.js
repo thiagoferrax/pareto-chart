@@ -169,11 +169,14 @@ export default class ParetoChart extends Component {
             }
         }
 
+        const datasetKeyProvider = () => Math.random()
+
         return (
             <Grid cols={this.props.cols}>
                 <div className="paretoChart_">
                     <div className="chart_">
                         <Bar
+                            datasetKeyProvider={datasetKeyProvider}
                             width={this.props.width}
                             height={this.props.height}
                             data={chartData}
