@@ -1,3 +1,151 @@
-.paretoChart{
-    padding: 15px;
+.paretoChart_{
+    display: flex;
+}
+
+.chart_{
+    flex:4;
+}
+
+.legend_{
+    flex:1;
+    padding: 10px;
+}
+
+.legend {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
+.legendLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4f4f4f;
+    font-size: 0.95em;
+    font-weight: 400; 
+    margin-bottom: 6px;   
+    cursor: default;     
+} 
+
+.labelSquare{
+    flex: 1;
+    width: 42px;
+    height: 14px;    
+    margin: 0px 4px 0px 4px;
+}
+
+.labelLineThrough{
+    text-decoration: line-through;
+    font-size: 0.95em;
+    font-weight: 400;
+    color: #4f4f4f;
+}
+
+.label_{
+    font-size: 0.95em;
+    font-weight: 400;    
+    color: #4f4f4f;
+}
+
+.blue_{
+    background: rgb(0, 192, 239, 0.1);
+}
+
+.black_{
+    background: rgb(17, 17, 17, 0.1);
+}
+
+.blue_two_ {
+    background: rgb(11, 120, 206, 0.1);
+}
+
+.gray_ {
+    background: rgb(104,115,140, 0.1);
+}
+
+.green_ {
+    background:rgb(48, 187, 187, 0.1);
+}
+
+.pink_ {
+    background: rgb(216, 27, 96, 0.1);
+}
+
+.purple_ {
+    background: rgb(85, 82, 153, 0.1);
+}
+
+.orange_ {
+    background:rgb(255, 119, 1, 0.1);
+}
+
+.blue_dark{
+    background: rgb(0, 192, 239, 0.3);
+}
+
+.black_dark{
+    background: rgb(17, 17, 17, 0.3);
+}
+
+.blue_two_dark {
+    background: rgb(11, 120, 206, 0.3);
+}
+
+.gray_dark {
+    background: rgb(104,115,140, 0.3);
+}
+
+.green_dark {
+    background:rgb(48, 187, 187, 0.3);
+}
+
+.pink_dark {
+    background: rgb(216, 27, 96, 0.3);
+}
+
+.purple_dark {
+    background: rgb(85, 82, 153, 0.3);
+}
+
+.orange_dark {
+    background:rgb(255, 119, 1, 0.3);
+}
+
+.blueBorder{
+    border-color: rgb(0, 192, 239) !important;
+}
+
+.blackBorder{
+    border-color: rgb(17, 17, 17) !important;
+}
+
+.blue_twoBorder {
+    border-color: rgb(11, 120, 206) !important;
+}
+
+.grayBorder {
+    border-color: rgb(104,115,140) !important;
+}
+
+.greenBorder {
+    border-color: rgb(48, 187, 187) !important;
+}
+
+.pinkBorder {
+    border-color: rgb(216, 27, 96) !important;
+}
+
+.purpleBorder {
+    border-color: rgb(85, 82, 153) !important;
+}
+
+.orangeBorder {
+    border-color: rgb(255, 119, 1) !important;
+}
+
+.all {
+    border: 2px solid;
 }
