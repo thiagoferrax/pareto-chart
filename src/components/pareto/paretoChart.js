@@ -30,15 +30,15 @@ export default class ParetoChart extends Component {
             'rgb(255, 119, 1, .3)',
             'rgb(17, 17, 17, .3)',
             'rgb(96, 92, 168, .3)'
-            
+
         ]
-    
+
         if (index > colors.length) {
             index -= colors.length
         }
         return colors[index]
     }
-    
+
     getChartBorderColor = (index) => {
         const colors = [
             'rgb(0, 192, 239)',
@@ -50,7 +50,7 @@ export default class ParetoChart extends Component {
             'rgb(17, 17, 17)',
             'rgb(96, 92, 168)'
         ]
-    
+
         if (index > colors.length) {
             index -= colors.length
         }
@@ -59,10 +59,10 @@ export default class ParetoChart extends Component {
 
     componentWillMount() {
         const data = this.props.data
-        if(data) {
-            const selectedLegend = Object.keys(data)[this.state.index]  
+        if (data) {
+            const selectedLegend = Object.keys(data)[this.state.index]
             const orderedData = this.sortData(data[selectedLegend])
-            this.setState({data:orderedData, selectedLegend})
+            this.setState({ data: orderedData, selectedLegend })
         }
     }
 
@@ -75,7 +75,11 @@ export default class ParetoChart extends Component {
         const barDataset = Object.values(data).reduce((set, e) => {
             set.data.push(e)
             return set
-        }, { label: this.props.yLabel, data: [], borderWidth: 2, backgroundColor: this.getChartColor(this.state.index), borderColor: this.getChartBorderColor(this.state.index) })
+        }, { 
+            label: this.props.yLabel, 
+            data: [], 
+            borderWidth: 2, backgroundColor: this.getChartColor(this.state.index), borderColor: this.getChartBorderColor(this.state.index) 
+        })
 
         let before = 0
         const lineData = barDataset.data.map(d => {
@@ -114,7 +118,9 @@ export default class ParetoChart extends Component {
 
         const chartData = this.getChartData(this.state.data)
 
-        const maxYAxisValue = this.getMaxYAxisValue(this.state.data)
+        let maxYAxisValue = this.getMaxYAxisValue(this.state.data)
+
+        //maxYAxisValue += 10 - (maxYAxisValue%10)
 
         const options = {
             legend: {
@@ -136,7 +142,7 @@ export default class ParetoChart extends Component {
                     },
                     ticks: {
                         min: 0,
-                        max: maxYAxisValue
+                        max: maxYAxisValue                        
                     }
                 }, {
                     id: 'B',
@@ -176,14 +182,14 @@ export default class ParetoChart extends Component {
 
     selectDataset(index) {
         const data = this.props.data
-        if(data) {
-            const selectedLegend = Object.keys(data)[index] 
-            const orderedData = this.sortData(data[selectedLegend])           
-            this.setState({data: orderedData, selectedLegend, index})
+        if (data) {
+            const selectedLegend = Object.keys(data)[index]
+            const orderedData = this.sortData(data[selectedLegend])
+            this.setState({ data: orderedData, selectedLegend, index })
         }
     }
 
-    getLegend() {        
+    getLegend() {
         const labels = Object.keys(this.props.data)
 
         const labelsDivs = labels.map((label, index) => {
@@ -209,13 +215,13 @@ export default class ParetoChart extends Component {
             'blue',
             'pink',
             'gray',
-            'green',            
-            'blue_two',            
+            'green',
+            'blue_two',
             'orange',
-            'black',            
+            'black',
             'purple'
         ]
-    
+
         if (index >= colors.length) {
             index -= colors.length
         }
