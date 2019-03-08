@@ -26,6 +26,8 @@ class Example extends Component {
   render () {
     return (
         <ParetoChart
+          width={100}
+          height={50}
           data={{
             'Customer complaints': {
               'Dificult parking': 40,

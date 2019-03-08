@@ -78,7 +78,9 @@ export default class ParetoChart extends Component {
         }, { 
             label: this.props.yLabel, 
             data: [], 
-            borderWidth: 2, backgroundColor: this.getChartColor(this.state.index), borderColor: this.getChartBorderColor(this.state.index) 
+            borderWidth: 2, 
+            backgroundColor: this.getChartColor(this.state.index), 
+            borderColor: this.getChartBorderColor(this.state.index) 
         })
 
         let before = 0
@@ -119,8 +121,6 @@ export default class ParetoChart extends Component {
         const chartData = this.getChartData(this.state.data)
 
         let maxYAxisValue = this.getMaxYAxisValue(this.state.data)
-
-        //maxYAxisValue += 10 - (maxYAxisValue%10)
 
         const options = {
             legend: {
@@ -168,6 +168,8 @@ export default class ParetoChart extends Component {
                 <div className="paretoChart_">
                     <div className="chart_">
                         <Bar
+                            width={this.props.width}
+                            height={this.props.height}
                             data={chartData}
                             options={options}
                         />

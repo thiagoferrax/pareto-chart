@@ -1,6 +1,6 @@
 {
   "name": "pareto-chart",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Get a pareto chart that can be used as a react component.",
   "author": "thiagoferrax",
   "license": "MIT",

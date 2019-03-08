@@ -10,6 +10,8 @@ export default class App extends Component {
         <hr />
         <br />
         <ParetoChart
+          width={100}
+          height={50}
           data={{
             'Customer complaints': {
               'Dificult parking': 40,
