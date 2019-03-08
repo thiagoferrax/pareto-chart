@@ -67,7 +67,7 @@ export default class ParetoChart extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.data !== nextProps.data) {
+        if (this.props.data !== nextProps.data) {
             const data = nextProps.data
             const selectedLegend = Object.keys(data)[this.state.index]
             const orderedData = this.sortData(data[selectedLegend])
@@ -81,13 +81,13 @@ export default class ParetoChart extends Component {
         const barDataset = Object.values(data).reduce((set, e) => {
             set.data.push(e)
             return set
-        }, { 
-            label: this.props.yLabel, 
-            data: [], 
-            borderWidth: 2, 
-            backgroundColor: this.getChartColor(this.state.index), 
-            borderColor: this.getChartBorderColor(this.state.index) 
-        })
+        }, {
+                label: this.props.yLabel,
+                data: [],
+                borderWidth: 2,
+                backgroundColor: this.getChartColor(this.state.index),
+                borderColor: this.getChartBorderColor(this.state.index)
+            })
 
         let before = 0
         const lineData = barDataset.data.map(d => {
@@ -119,6 +119,8 @@ export default class ParetoChart extends Component {
         return maxYAxisValue
     }
 
+    datasetKeyProvider() { return Math.random() }
+
     render() {
         if (!this.state.data) {
             return <React.Fragment></React.Fragment>
@@ -148,7 +150,7 @@ export default class ParetoChart extends Component {
                     },
                     ticks: {
                         min: 0,
-                        max: maxYAxisValue                        
+                        max: maxYAxisValue
                     }
                 }, {
                     id: 'B',
@@ -169,14 +171,12 @@ export default class ParetoChart extends Component {
             }
         }
 
-        const datasetKeyProvider = () => Math.random()
-
         return (
             <Grid cols={this.props.cols}>
                 <div className="paretoChart_">
                     <div className="chart_">
                         <Bar
-                            datasetKeyProvider={datasetKeyProvider}
+                            datasetKeyProvider={this.datasetKeyProvider}
                             width={this.props.width}
                             height={this.props.height}
                             data={chartData}
