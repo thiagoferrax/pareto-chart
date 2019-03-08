@@ -67,6 +67,12 @@ export default class ParetoChart extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        if(this.props.data !== nextProps.data) {
+            const data = nextProps.data
+            const selectedLegend = Object.keys(data)[this.state.index]
+            const orderedData = this.sortData(data[selectedLegend])
+            this.setState({ data: orderedData, selectedLegend })
+        }
     }
 
     getChartData(data) {
