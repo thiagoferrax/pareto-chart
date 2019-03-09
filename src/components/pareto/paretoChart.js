@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Grid from '../layout/grid'
 import { Bar } from 'react-chartjs-2'
 import memoize from 'memoize-one'
@@ -6,7 +6,7 @@ import './paretoChart.css'
 
 const INITIAL_STATE = { index: 0 }
 
-export default class ParetoChart extends Component {
+export default class ParetoChart extends PureComponent {
     constructor(props) {
         super(props)
         this.state = INITIAL_STATE
