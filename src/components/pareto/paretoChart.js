@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import Grid from '../layout/grid'
 import { Bar } from 'react-chartjs-2'
 import memoize from 'memoize-one'
@@ -6,7 +6,7 @@ import './paretoChart.css'
 
 const INITIAL_STATE = { index: 0 }
 
-export default class ParetoChart extends PureComponent {
+export default class ParetoChart extends Component {
     constructor(props) {
         super(props)
         this.state = INITIAL_STATE
@@ -24,6 +24,12 @@ export default class ParetoChart extends PureComponent {
             changed = true
         }
         return changed
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if(!Object.keys(nextProps.data)[nextState.index]) {
+            this.selectDataset(0)
+        }
     }
 
     sortData(data) {
