@@ -12,6 +12,20 @@ export default class ParetoChart extends PureComponent {
         this.state = INITIAL_STATE
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        let changed = false
+        for (const index in nextProps) {
+            if (JSON.stringify(nextProps[index]) !== JSON.stringify(this.props[index])) {
+                changed = true
+            }
+        }
+
+        if(this.state.index !== nextState.index) {
+            changed = true
+        }
+        return changed
+    }
+
     sortData(data) {
         const orderedData = Object.entries(data).sort((a, b) => b[1] - a[1]).reduce((ordered, entry) => {
             ordered[entry[0]] = entry[1]
