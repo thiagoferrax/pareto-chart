@@ -71,8 +71,8 @@ export default class ParetoChart extends Component {
     componentWillReceiveProps(nextProps) {
         let changed = false
         for (const index in nextProps) {
-            if (nextProps[index] !== this.props[index]) {
-                console.log(index, this.props[index], '-->', nextProps[index])
+            if (JSON.encode(nextProps[index]) !== JSON.encode(this.props[index])) {
+                console.log(index, JSON.encode(nextProps[index]), '-->', JSON.encode(this.props[index]))
                 changed = true
             }
         }
