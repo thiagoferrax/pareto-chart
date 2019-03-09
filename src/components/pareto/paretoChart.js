@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Grid from '../layout/grid'
 import { Bar } from 'react-chartjs-2'
+import memoize from 'memoize-one'
 import './paretoChart.css'
 
-const INITIAL_STATE = { data: undefined, selectedLegend: undefined, index: 0 }
+const INITIAL_STATE = { index: 0 }
 
 export default class ParetoChart extends Component {
     constructor(props) {
@@ -57,34 +58,14 @@ export default class ParetoChart extends Component {
         return colors[index]
     }
 
-    componentWillMount() {
-        const data = this.props.data
-        if (data) {
-            const selectedLegend = Object.keys(data)[this.state.index]
-            const orderedData = this.sortData(data[selectedLegend])
-            this.setState({ data: orderedData, selectedLegend })
-        }
+    getSelectedLegend(data, index) {
+        return Object.keys(data)[index]
     }
 
-
-
-    componentWillReceiveProps(nextProps) {
-        let changed = false
-        for (const index in nextProps) {
-
-            if (JSON.stringify(nextProps[index]) !== JSON.stringify(this.props[index])) {
-                console.log(index, JSON.stringify(nextProps[index]), '-->', JSON.stringify(this.props[index]))
-                changed = true
-            }
-        }
-
-        if (changed) {
-            const data = nextProps.data
-            const selectedLegend = Object.keys(data)[this.state.index]
-            const orderedData = this.sortData(data[selectedLegend])
-            this.setState({ data: orderedData, selectedLegend })
-        }
-    }
+    getSortedData = memoize((data, index) => {
+        const selectedLegend = this.getSelectedLegend(data, index)
+        return this.sortData(data[selectedLegend])
+    })
 
     getChartData(data) {
         const total = this.getMaxYAxisValue(data)
@@ -133,13 +114,15 @@ export default class ParetoChart extends Component {
     datasetKeyProvider() { return Math.random() }
 
     render() {
-        if (!this.state.data) {
+        const data = this.getSortedData(this.props.data, this.state.index)
+        
+        if (!data) {
             return <React.Fragment></React.Fragment>
         }
 
-        const chartData = this.getChartData(this.state.data)
+        const chartData = this.getChartData(data)
 
-        let maxYAxisValue = this.getMaxYAxisValue(this.state.data)
+        let maxYAxisValue = this.getMaxYAxisValue(data)
 
         const options = {
             legend: {
@@ -203,12 +186,7 @@ export default class ParetoChart extends Component {
     }
 
     selectDataset(index) {
-        const data = this.props.data
-        if (data) {
-            const selectedLegend = Object.keys(data)[index]
-            const orderedData = this.sortData(data[selectedLegend])
-            this.setState({ data: orderedData, selectedLegend, index })
-        }
+        this.setState({ index })
     }
 
     getLegend() {

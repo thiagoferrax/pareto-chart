@@ -1,6 +1,6 @@
 {
   "name": "pareto-chart",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Get a pareto chart that can be used as a react component.",
   "author": "thiagoferrax",
   "license": "MIT",
@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "chart.js": "2.7.3",
+    "memoize-one": "5.0.0",
     "react-chartjs-2": "2.7.4"
   },
   "files": [
