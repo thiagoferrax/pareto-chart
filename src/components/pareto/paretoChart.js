@@ -16,6 +16,7 @@ export default class ParetoChart extends Component {
         let changed = false
         for (const index in nextProps) {
             if (JSON.stringify(nextProps[index]) !== JSON.stringify(this.props[index])) {
+                console.log('shouldComponentUpdate', JSON.stringify(nextProps[index]), JSON.stringify(this.props[index]))
                 changed = true
             }
         }
@@ -28,6 +29,7 @@ export default class ParetoChart extends Component {
 
     componentWillUpdate(nextProps, nextState) {
         if(!Object.keys(nextProps.data)[nextState.index]) {
+            console.log('componentWillUpdate', nextState.index)
             this.selectDataset(0)
         }
     }
