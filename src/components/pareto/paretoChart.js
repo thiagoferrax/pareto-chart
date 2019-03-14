@@ -98,7 +98,7 @@ export default class ParetoChart extends Component {
         }, {
                 label: this.props.yLabel,
                 data: [],
-                borderWidth: 2,
+                borderWidth: 1.5,
                 backgroundColor: this.getChartColor(this.state.index),
                 borderColor: this.getChartBorderColor(this.state.index)
             })
@@ -115,7 +115,7 @@ export default class ParetoChart extends Component {
             label: 'Line',
             data: lineData,
             type: 'line',
-            borderWidth: 2,
+            borderWidth: 1.5,
             backgroundColor: 'transparent',
             borderColor: 'rgb(51, 51, 51, 0.5)'
         }
