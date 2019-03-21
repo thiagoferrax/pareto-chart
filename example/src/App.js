@@ -12,6 +12,7 @@ export default class App extends Component {
         <ParetoChart
           width={100}
           height={50}
+          lineLabel='Cumulative percentage'
           data={{
             'Customer complaints': {
               'Dificult parking': 40,

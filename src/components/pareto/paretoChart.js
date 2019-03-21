@@ -112,7 +112,7 @@ export default class ParetoChart extends Component {
 
         const lineDataset = {
             yAxisID: 'B',
-            label: 'Line',
+            label: this.getLineLabel(),
             data: lineData,
             type: 'line',
             borderWidth: 1.5,
@@ -135,6 +135,10 @@ export default class ParetoChart extends Component {
 
     datasetKeyProvider() { return Math.random() }
 
+    getLineLabel() {
+        return this.props.lineLabel || 'Cumulative percentage'
+    }
+
     render() {
         const data = this.getSortedData(this.props.data, this.state.index)
         
@@ -144,7 +148,8 @@ export default class ParetoChart extends Component {
 
         const chartData = this.getChartData(data)
 
-        let maxYAxisValue = this.getMaxYAxisValue(data)
+        const maxYAxisValue = this.getMaxYAxisValue(data)
+        const lineLabel = this.getLineLabel()
 
         const options = {
             legend: {
@@ -157,7 +162,7 @@ export default class ParetoChart extends Component {
                     }
                 }],
 
-                yAxes: [{
+                yAxes: [{ 
                     id: 'A',
                     type: 'linear',
                     position: 'left',
@@ -178,12 +183,23 @@ export default class ParetoChart extends Component {
                     ticks: {
                         min: 0,
                         max: 100,
-                        stepSize: 20,
-                        callback: function (value, index, values) {
-                            return value + '%'
-                        }
+                        stepSize: 20
                     }
                 }]
+            }, 
+            tooltips: {
+                enabled: true,
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        console.log('callbacks', data)
+                        var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || ''
+                        if(datasetLabel === lineLabel) {
+                            return datasetLabel + ': ' + parseFloat(tooltipItem.yLabel).toFixed(1) + '%'
+                        } else {
+                            return datasetLabel + ': ' + tooltipItem.yLabel
+                        }
+                    }
+                }
             }
         }
 
