@@ -16,7 +16,6 @@ export default class ParetoChart extends Component {
         let changed = false
         for (const index in nextProps) {
             if (JSON.stringify(nextProps[index]) !== JSON.stringify(this.props[index])) {
-                console.log('shouldComponentUpdate', JSON.stringify(nextProps[index]), JSON.stringify(this.props[index]))
                 changed = true
             }
         }
@@ -29,7 +28,6 @@ export default class ParetoChart extends Component {
 
     componentWillUpdate(nextProps, nextState) {
         if(!Object.keys(nextProps.data)[nextState.index]) {
-            console.log('componentWillUpdate', nextState.index)
             this.selectDataset(0)
         }
     }
@@ -191,7 +189,6 @@ export default class ParetoChart extends Component {
                 enabled: true,
                 callbacks: {
                     label: function (tooltipItem, data) {
-                        console.log('callbacks', data)
                         var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || ''
                         if(datasetLabel === lineLabel) {
                             return datasetLabel + ': ' + parseFloat(tooltipItem.yLabel).toFixed(1) + '%'
